@@ -6,10 +6,8 @@ This article outlines the process of building Android 16 Automotive OS for the R
 
 **Prepared by DHINESH E** · <u>dhinesh701@gmail.com</u> 
 
+<img width="916" height="473" alt="image" src="https://github.com/user-attachments/assets/96abb464-c3e5-4abd-b8f3-f316763284de" />
 
-
-<!-- Start of picture text -->
-09:20 Android 16<br>@ 24°C<br>Automotive OS<br>Weather<br>on Raspberry Pi 5<br>Media<br>AOSP build · SD card image · flash<br>>>il —  — ———<br>− 22 + − 22 +<br>|<br>aon Oi<br><!-- End of picture text -->
 
 The Raspberry Pi 5 serves as a robust platform for exploring Android Automotive and IoT innovations. This guide takes you through the process of building AOSP Android 16 for the Raspberry Pi 5, integrating it smoothly with the hardware, and discovering new possibilities beyond traditional use cases. Whether you’re an Android enthusiast or a developer eager to experiment with the latest technology, this article offers a clear and practical roadmap to get you started. 
 
