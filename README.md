@@ -1,5 +1,3 @@
-Aosp Android Automotive Android Framework Yocto Android App Development 
-
 # **Build AOSP Android 16 Automotive OS for Raspberry Pi 5 and flash it.** 
 
 This article outlines the process of building Android 16 Automotive OS for the Raspberry Pi 5, including the setup of the AOSP build environment, creating a flashable SD card image, building the BSP (kernel, device trees, overlays) with Yocto and replacing it in the Android build, flashing the device, and highlighting the issues, challenges, and key takeaways encountered along the way. 
@@ -19,8 +17,6 @@ Let’s dive in!
 
 CPU: AMD Ryzen 9 9950TM-16 Core 
 
-1 
-
 - OS: Ubuntu 22.04.5 LTS 
 
 - RAM: 64 GB 
@@ -39,10 +35,9 @@ CPU: AMD Ryzen 9 9950TM-16 Core
 
 - Mini HDMi to HDMI cable 
 
+<img width="965" height="555" alt="image" src="https://github.com/user-attachments/assets/f86aeee8-eb36-4755-bd2e-d834ac674c64" />
 
 
-<!-- Start of picture text -->
-CcSS ><br>ee Ate &<br>WeaaSo N 7 a<br>= . co<br>7<br>e es<br>eo: Oe \ cena<br>we<br>= 2.x MICRO-HOMI® PORTS:<br><!-- End of picture text -->
 
 ### **Tools on Build Machine:** 
 
@@ -61,8 +56,6 @@ sudo apt-get update
 sudo apt-get install openjdk-17-jdk
 java -version
 ```
-
-2 
 
 ### **Git** 
 
@@ -96,8 +89,6 @@ Installing these packages may take some time. Please allow the process to comple
 If you have built AOSP before, you may have already completed this step and have `repo` installed and set up on your PC. 
 
 You can skip the “Install the repo tool” step if it was already installed during a previous AOSP setup. In that case, you will see the following message: 
-
-3 
 
 ```
 ... A new version of repo (2.54) is available.
@@ -156,8 +147,6 @@ git clone https://github.com/raspberry-vanilla/android_local_manifest.git .repo/
 sts -b android-16.0
 ```
 
-4 
-
 **|| OR ||** 
 
 ```
@@ -206,7 +195,6 @@ In `-j<n>` , where `n` is the number of cores available on your build machine. I
 
 Here’s an optimised `repo sync` command 
 
-5 
 
 ```
 repo sync -c -j12 --force-sync --no-clone-bundle --no-tags
@@ -226,12 +214,10 @@ I have not used any of these options. Try adding them and observing the result.
 
 #### **Repo sync is completed!** 
 
+<img width="927" height="438" alt="image" src="https://github.com/user-attachments/assets/d1439142-044d-4adb-b193-7a7f4930c19d" />
 
 
-<!-- Start of picture text -->
-Receiving objects: 100% (2794/2794), 1.88 MiB | 112.97 MiB/s, done.<br>Resolving deltas: 100% (14/14), done.<br>Receiving objects: 100% (2868/2868), 962.98 KiB | 82.09 MiB/s, done.eiving objects: 0% (1/2868)<br>Resolving deltas: 100% (19/19), done.<br>Receiving objects: 100% (3262/3262), 1.15 MiB | 73.92 MB/s, done.<br>Resolving deltas: 100% (211/211), done.<br>Receiving objects: 100% (3876/3876), 1.51 MiB | 73.51 MiB/s, done.eceiving objects: 0% (1/3876)<br>Resolving deltas: 100% (114/114), done.<br>Receiving objects: 100% (13073/13073), 3.18 MiB | 69.29 MiB/s, done.eiving objects: 0% (1/13073)<br>Resolving deltas: 100% (7579/7579), done.<br>Receiving objects: 100% (22454/22454), 3.42 MiB | 68.66 MiB/s, done.eiving objects: 0% (1/22454)<br>Resolving deltas: 100% (11860/11860), done.<br>Receiving objects: 100% (3418/3418), 1.02 MiB | 61.15 MiB/s, done.ecetving objects: 0% (1/3418)<br>Resolving deltas: 100% (128/128), done.<br>Receiving objects: 100% (5468/5468), 7.51 MiB | 124.00 MiB/s, done.ceiving objects: 0% (1/5468)<br>Resolving deltas: 100% (3819/3819), done.<br>Receiving objects: 100% (3611/3611), 1.10 MiB | 86.72 MiB/s, done.eceiving objects: 0% (1/3611)<br>Resolving deltas: 100% (591/591), done.<br>Receiving objects: 100% (4520/4520), 1.49 MiB | 76.23 MB/s, done.eceiving objects: 82% (103138/125777), 45.<br>Resolving deltas: 100% (550/550), done.<br>Receiving objects: 100% (125777/125777), 134.71 MiB | 99.17 MiB/s, done.ng objects: 87% (109426/125777), 45.<br>Resolving deltas: 100% (109906/109906), done.8 platform/cts @ ctsResolving deltas: 95% (104411/109906)<br>Receiving objects: 100% (2830/2830), 1.84 MiB | 104.83 MiB/s, done.ceiving objects: 0% (1/2830)<br>Resolving deltas: 100% (97/97), done.<br>Syncing: 25% (250/982) 16:51 | 12 jobs | 16:49 platform/cts @ cts[]<br><!-- End of picture text -->
-
-_Repo sync completed after 2 hrs 13 min!!_ 
+**_Repo sync completed after 2 hrs 13 min!!_ **
 
 ### **Set up Android build environment:** 
 
@@ -248,8 +234,6 @@ lunch
 #### **Output Lunch Options:** 
 
 As observed when building Android 15, the lunch options are similarly available in Android 16. 
-
-6 
 
 ```
 aosp_rpi4_car-trunk_staging-userdebug
@@ -272,7 +256,7 @@ lunch aosp_rpi5_car-bp2a-userdebug
 
 ```
 ============================================
-PLATFORM_VERSION_CODENAME=REL
+**PLATFORM_VERSION_CODENAME=REL
 PLATFORM_VERSION=16
 TARGET_PRODUCT=aosp_rpi5_car
 TARGET_BUILD_VARIANT=userdebug
@@ -285,7 +269,7 @@ HOST_CROSS_OS=windows
 BUILD_ID=BP2A.250605.031.A2
 OUT_DIR=out
 SOONG_ONLY=false
-============================================
+==================**==========================
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
   Wondering whether to use user, userdebug or eng?
   user       The builds that ship to users. Reduced debugability.
@@ -306,21 +290,15 @@ make bootimage systemimage vendorimage -j$(nproc)
 make bootimage systemimage vendorimage -j12
 ```
 
-7 
-
 _The build has started! Time to grab a coffee._ 
 
+<img width="917" height="328" alt="image" src="https://github.com/user-attachments/assets/24f4d098-cc17-4d98-a24b-8007cc6cc5e5" />
 
-
-<!-- Start of picture text -->
-PLATFORM_VERSION_CODENAME=REL<br>PLATFORM_VERSION=16<br>TARGET_PRODUCT=aosp_rpiS_car<br>TARGET_BUILD_VARIANT=userdebug<br>TARGET_ARCH=arm64<br>TARGET_ARCH_VARIANT=armv8-a<br>TARGET_CPU_VARIANT=cortex-a76<br>HOST_OS=linux<br>HOST_OS_EXTRA=Linux-6.8.0-64-generic-x86_64-Ubuntu-22.04.5-LTS<br>HOST_CROSS_OS=windows<br>BUILD_ID=BP2A.250605.031.A2<br>OUT_DIR=out<br>SOONG_ONLY=false<br>[ 99% 132/133] analyzing Android.bp files and generating ninja file at out/soong/build.aosp_rpiS_car.ninja<br>analyzing Android.bp files and generating ninja file at out/soong/build.aosp_rpiS_car.ninja<br><!-- End of picture text -->
 
 #### **Build Completed!!** 
 
+<img width="921" height="248" alt="image" src="https://github.com/user-attachments/assets/c61491d2-3f0b-4f2d-90ac-76509f84d7aa" />
 
-
-<!-- Start of picture text -->
-[ 99% 150357/150366] //external/icu/android_icu4j:stable.i18n.module.platform.api.stubs.source metalava merg|<br>external /icu/android_icu4j/src/main/java/android/icu/text/Transliterator. java:455: Public class and<br>ext.StringTransform (ErrorWhenNew) [HiddenSuperclass<br>external/icu/android_icu4j/src/main/java/android/icu/text/Transliterator.java:455: Public class and<br>ext.Transform (ErrorWhenNew) [HiddenSuperclass<br>external/icu/android_icu4j/src/main/java/android/icu/text/UCharacterIterator.java:30: Public class<br>d.icu.text.UForwardCharacterIterator (ErrorwhenNew) [HiddenSuperclass]<br>[ 99% 150365/150366] //frameworks/base/api:systen-api-stubs-docs-non-updatable metalava merged (priority: ©)<br>frameworks /base/telecomm/java/android/teLecom/TelecomManager . java:2853: When a method overload is nj<br>ext.createPackageContextAsUser() and re-obtain the relevant Manager, and no new API should be added (Errorwh,<br>metalava wrote updated baseline to /media/narendra147h/UbuntuDrive/WorkSpace/AOSP/Android16/out/soong/.temp/<br>[100% 150366/150366] //frameworks/base/api:system-api-stubs-docs-non-updatable check current API (priority<br><!-- End of picture text -->
 
 This will generate files such as `out/target/product/rpi5/system.img` , `boot.img` , and others. With the Raspberry Pi build now complete, we can proceed to prepare the flashing image. 
 
@@ -330,13 +308,8 @@ This will generate files such as `out/target/product/rpi5/system.img` , `boot.im
 cd out/target/product/rpi5/
 ls -la
 ```
+<img width="672" height="808" alt="image" src="https://github.com/user-attachments/assets/de7fa98e-82e5-4a57-b347-312ea85d8fc9" />
 
-8 
-
-
-
-<!-- Start of picture text -->
-4096 Sep 7 11:47<br>4096 Sep 7 10:26<br>2132029 Sep 7 10:41 all_modules.txt<br>14 Sep 7 11:46 android-info.txt<br>4096 Sep 7 11:46<br>134217728 Sep 7 11:46 boot.img<br>82 Sep 7 10:26 build_fingerprint.txt<br>53 Sep 7 10:41 build_thumbprint.txt<br>169381 Sep 7 10:41 clean_steps.mk<br>37 Sep 7 10:41 .copied_headers_list<br>4096 Sep 7 11:46<br>12288 Sep 7 11:46<br>4096 Sep 7 11:46<br>4096 Sep 7 11:38<br>3379189 Sep 7 10:41 .installable_files.previous<br>539076 Sep 7 11:46 installed-files.json<br>286 Sep 7 11:46 installed-files-ramdisk.json<br>62 Sep 7 11:46 installed-files-ramdisk.txt<br>3139 Sep 7 11:46 installed-files-root.json<br>674 Sep 7 11:46 installed-files-root.txt<br>186925 Sep 7 11:46 installed-files.txt<br>89794 Sep 7 11:46 installed-files-vendor.json<br>28145 Sep 7 11:46 installed-files-vendor.txt<br>35371520 Sep 7 10:48<br>4096 Sep 7 11:46<br>49 Sep 7 10:42 previous_build_config.mk<br>© Sep 7 10:42 previous_use_partial_compile.txt<br>16619 Sep 7 11:43 product_packages.txt<br>4096 Sep 7 11:46<br>1831354 Sep 7 11:46 ramdisk.img<br>4096 Sep 7 11:46<br>4096 Sep 7 11:46<br>4096 Sep 7 11:48<br>4096 Sep 7 11:46<br>2684354560 Sep 7 11:47 system.img<br>4096 Sep 7 11:46<br>268435456 Sep 7 11:46 vendor.img<br><!-- End of picture text -->
 
 The `RaspberryVanillaAOSP16–20250907-rpi5_car.img` has been generated, which is our final target. Let’s proceed to build the final image. 
 
@@ -348,10 +321,8 @@ croot # go back to root dir
 
 In the Root dir of AOPS “Android16/”, you will see the following files: 
 
+<img width="838" height="136" alt="image" src="https://github.com/user-attachments/assets/c018ece0-0e72-47d0-8654-19e7fce344c4" />
 
-
-<!-- Start of picture text -->
-25 Sep 7 00:58 -><br>25 Sep 7 00:58 -><br>25 Sep 7 00:58 -><br>25 Sep 7 00:58 -><br>4096 Sep 7 08:42<br><!-- End of picture text -->
 
 #### **Run:** 
 
@@ -363,10 +334,8 @@ In the Root dir of AOPS “Android16/”, you will see the following files:
 
 #### **Success Output:** 
 
+<img width="917" height="363" alt="image" src="https://github.com/user-attachments/assets/86efd643-910d-4c23-848c-bc60be8836db" />
 
-
-<!-- Start of picture text -->
-Image mounted as /dev/100p20<br>Copying boot...<br>128+0 records in<br>128+0 records out<br>134217728 bytes (134 MB, 128 MiB) copted, 0.120549 s, 1.1 GB/s<br>Copying systen...<br>2560+8 records in<br>256040 records out<br>2684354560 bytes (2.7 GB, 2.5 GiB) copied, 1.3428 s, 2.0 GB/s<br>Copying vendor...<br>256+0 records in<br>256+0 records out<br>268435456 bytes (268 MB, 256 MLB) copied, 0.631024 s, 425 MB/s<br>Creating userdata...<br>nke2fs 1.46.5 (30-Dec-2621)<br>Discarding device blocks: done<br>Creating filesystem with 2996080 4k blocks and 749248 inodes<br>Filesystem UID: 4b6b304b-74e8-4211-a282-b7bd47596862<br>Superblock backups stored on blocks:<br>32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208,<br>Allocating group tables: done<br>Writing tnode tables: done<br>Creating journal (16384 blocks): done<br>Writing superblocks and filesystem accounting information: done<br>Done, created /media/narendra147h/Ubuntudrive/Workspace/A0SP/Androidi6/out<br>target /product/rpis/RaspberryVantLLaA0SP16-20250907-rptS_car-ing!<br><!-- End of picture text -->
 
 **Note:** The final part of the output — `"Done, created out/target/product/rpi5/RaspberryVanillaAOSP16–20250907-rpi5_car.img!"` — should appear when the build completes successfully. If any errors occur, this message will not be displayed, and an error will be shown instead. 
 
@@ -378,13 +347,8 @@ Once the build is complete, verify that the following files are present: `Raspbe
 cd ../../android-aosp/out/target/product/rpi5/
 ls -la
 ```
+<img width="757" height="815" alt="image" src="https://github.com/user-attachments/assets/f8a0bd4c-0b9b-4c80-8a33-efe68dcae4a7" />
 
-10 
-
-
-
-<!-- Start of picture text -->
-4096 Sep 7 12:03<br>4096 Sep 7 10:26<br>2132029 Sep 7 10:41 all_modules.txt<br>14 Sep 7 11:46 android-info.txt<br>4096 Sep 7 11:46<br>134217728 Sep 7 11:46 boot.img<br>82 Sep 7 10:26 build_fingerprint.txt<br>53 Sep 7 10:41 build_thumbprint.txt<br>169381 Sep 7 10:41 clean_steps.mk<br>37 Sep 7 10:41 .copied_headers_list<br>4096 Sep 7 11:46<br>12288 Sep 7 11:46<br>4096 Sep 7 11:46<br>4096 Sep 7 11:38<br>3379189 Sep 7 10:41 .installable_files.previous<br>539076 Sep 7 11:46 installed-files.json<br>286 Sep 7 11:46 installed-files-ramdisk.json<br>62 Sep 7 11:46 installed-files-ramdisk.txt<br>3139 Sep 7 11:46 installed-files-root.json<br>674 Sep 7 11:46 installed-files-root.txt<br>186925 Sep 7 11:46 installed-files.txt<br>89794 Sep 7 11:46 installed-files-vendor.json<br>28145 Sep 7 11:46 installed-files-vendor.txt<br>35371520 Sep 7 10:48<br>4096 Sep 7 11:46<br>49 Sep 7 10:42 previous_build_config.mk<br>© Sep 7 10:42 previous_use_partial_compile.txt<br>16619 Sep 7 11:43 product_packages.txt<br>4096 Sep 7 11:46<br>1831354 Sep 7 11:46 ramdisk.img<br>15360000000 Sep 7 12:03 RaspberryVanillaAOSP16-20250907-rpi5_car.img<br>4096 Sep 7 11:46<br>4096 Sep 7 11:46<br>4096 Sep 7 11:48<br>4096 Sep 7 11:46<br>2684354560 Sep 7 11:47 system.img<br>4096 Sep 7 11:46<br>268435456 Sep 7 11:46 vendor.img<br><!-- End of picture text -->
 
 Output contains data `RaspberryVanillaAOSP16–20250907-rpi5_car.img` generated with a size of 15360000000. 
 
@@ -398,22 +362,16 @@ The Android build for Raspberry Pi 5 does not compile the Linux kernel. It takes
 
 - The Yocto kernel ( `linux-raspberrypi` ) comes from the Raspberry Pi kernel tree, not the Android Common Kernel. It **must** have the Android kernel config 
 
-11 
-
 options added (Step Y5); otherwise Android will not boot. 
 
-Keep a backup of the original BSP files so you can roll back (Step Y8). 
+- Keep a backup of the original BSP files so you can roll back (Step Y8). 
 
 ### **Y1. Yocto release used** 
 
 This guide uses **Yocto Project 6.0 “Wrynose” (LTS)** , supported until April 2030, with the `wrynose` branch of `meta-raspberrypi` . From Yocto 6.0 the separate _poky_ repository is no longer used; the layers (bitbake, openembedded-core, meta-yocto) are cloned individually. 
 
-|**Repository**|**Branch**|
-|---|---|
-|bitbake|`2.18`|
-|openembedded-core|`wrynose`|
-|meta-yocto (poky distro)|`wrynose`|
-|meta-raspberrypi (BSP layer)|`wrynose`|
+<img width="450" height="217" alt="image" src="https://github.com/user-attachments/assets/c7fab28a-76e8-4fef-a2d8-0eda4632dd5c" />
+
 
 
 
