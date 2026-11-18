@@ -330,7 +330,6 @@ In the Root dir of AOPS “Android16/”, you will see the following files:
 ./rpi5-mkimg.sh
 ```
 
-9 
 
 #### **Success Output:** 
 
@@ -410,8 +409,6 @@ for d in bitbake openembedded-core meta-yocto meta-raspberrypi; do
 done
 ```
 
-12 
-
 ### **Y4. Create the build directory and add layers** 
 
 ```
@@ -466,8 +463,6 @@ The fragment enables Binder/BinderFS, SELinux, cgroups/BPF, FUSE, dm-verity and 
 ### **Y6. Yocto build procedure** 
 
 Build only the BSP pieces Android needs (kernel Image, DTBs, overlays, modules): 
-
-13 
 
 ```
 cd ~/yocto-rpi5
@@ -524,8 +519,6 @@ export AOSP=~/Android16
 export DEPLOY=~/yocto-rpi5/build/tmp/deploy/images/raspberrypi5
 export KDIR=$AOSP/device/brcm/rpi5-kernel
 ```
-
-14 
 
 ### **Y8. Back up the original BSP files** 
 
@@ -587,7 +580,6 @@ modinfo -F vermagic $KDIR/modules/$(ls $KDIR/modules | head -1)
 
 Both should show the same kernel version ( **6.12.x** ). 
 
-15 
 
 ### **Y13. Rebuild the Android images with the Yocto BSP** 
 
@@ -641,7 +633,6 @@ adb shell lsmod
 
 - **Roll back:** `cd $KDIR && git checkout .` , then rebuild boot image. 
 
-16 
 
 - **Reference kernel:** the prebuilt Android kernel is built from the Android Common Kernel branch `common-android16-6.12-lts` with the raspberry-vanilla kernel manifest ( `android-16.0` ) — compare its `.config` with yours if something does not work. 
 
@@ -665,35 +656,22 @@ Click “Yes” without changing any settings. If you need to modify any options
 
 The tool will first write the image and then verify it; both steps may take some time, so it’s a good opportunity to grab a coffee. 
 
-17 
+<img width="817" height="583" alt="image" src="https://github.com/user-attachments/assets/bc443580-61e8-43b7-8712-b7bff83e83a7" />
 
 
 
-<!-- Start of picture text -->
-RaspberryPi Imager v1.8.5 - og xX<br>S Raspberry Pi<br>Raspberry Pi Device Operating System Storage<br>Writing... 0%<br>CANCEL WRITE<br><!-- End of picture text -->
+<img width="810" height="583" alt="image" src="https://github.com/user-attachments/assets/faf988f6-9da8-426e-9fec-1d7d526c2206" />
 
 
+<img width="816" height="582" alt="image" src="https://github.com/user-attachments/assets/6d769b24-09bd-49a8-8e05-5c40cc4ecf98" />
 
-<!-- Start of picture text -->
-Raspberry Pi Imager v1.8.5 5 © &<br>8 Raspberry Pi<br>Raspberry Pi Device Operating System Storage<br>Verifying... 7%<br><!-- End of picture text -->
-
-18 
-
-
-
-<!-- Start of picture text -->
-Raspberry Pi Imager v1.9.3 - ag x<br>Write Successful x<br>RaspberryVanillaAOSP16-20250907-rpi5_car.img has been written to<br>Generic STORAGE DEVICE<br>You can now remove the SD card from the reader<br>CONTINUE<br><!-- End of picture text -->
 
 The `RaspberryVanillaAOSP16–20250907-rpi5_car.img` The SD card is now ready to flash onto the Raspberry Pi 5 board. 
 
 After successfully flashing the SD card with — `RaspberryVanillaAOSP16–20250907rpi5_car.img` Your SD card partitions will appear as shown below. 
 
+<img width="842" height="586" alt="image" src="https://github.com/user-attachments/assets/ee02c450-1b1f-48cb-851c-ef86caf309dd" />
 
-
-<!-- Start of picture text -->
-.<br>/dev/sda - GParted - o x<br>GParted Edit View Device Partition Help<br>30 e iv) @ /dev/sda (59.48GiB) ~<br>/dev/sda4<br>11.43 GiB<br>/dev/sda1 & Fat32_/media/nar... boot 128.00MiB 39.19MiB_—88.81 MiB boot, lba<br>/dev/sda2 A ext4 /media/nar... / 2.50 GiB 1.61GiB 909.59 MiB<br>/dev/sda3 ext4 /media/nar... vendor  256.00MiB 176.94MiB 79.06 MiB<br>/dev/sda4 A ext4 /media/nar... userdata 11.43GiB 470.70 MiB 10.97 GiB<br>unallocated unallocated 45.17 GiB - 5<br>O operations pending<br><!-- End of picture text -->
-
-19 
 
 Here is the complete article to prepare the SD card! 
 
@@ -707,9 +685,10 @@ Insert the SD card into the Raspberry Pi 5 board and power it on. The board will
 
 Finally, I can see Android-16 Automotive OS on Display 
 
+<img width="772" height="583" alt="image" src="https://github.com/user-attachments/assets/be13484e-bed3-4f79-8201-4e369970a228" />
 
 
-20 
+<img width="933" height="527" alt="image" src="https://github.com/user-attachments/assets/73ed0221-e1c1-438f-aaa9-fea10dc3fce7" />
 
 
 
@@ -753,8 +732,6 @@ E: Unable to fetch some archives, maybe run apt-get update or try with --fix-mis
 ### **Build Issue:** 
 
 #### **lunch command:** 
-
-21 
 
 ```
 lunch
@@ -814,8 +791,6 @@ COMMON_LUNCH_CHOICES := \
 
 When you run → 
 
-22 
-
 ```
 lunch aosp_rpi5_car-trunk_staging-userdebug
 ```
@@ -857,5 +832,4 @@ _Thank you!_
 
 **Prepared by DHINESH E** · <u>dhinesh701@gmail.com</u> 
 
-23 
 
